@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfwfhbuyhogvu"]
+
+[ext_resource type="Script" uid="uid://bs1esnlxx2frd" path="res://return_button.gd" id="1_x2hje"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 260.0
+offset_bottom = 139.0
+text = "Settings"
+
+[node name="ReturnButton" type="Button" parent="."]
+offset_left = 70.0
+offset_top = 40.0
+offset_right = 94.0
+offset_bottom = 51.0
+script = ExtResource("1_x2hje")
+
+[connection signal="pressed" from="ReturnButton" to="ReturnButton" method="_on_pressed"]
