@@ -6,7 +6,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	position = (get_viewport_rect().size - size) / 2 + Vector2(0, 0)
 
 
 func _on_settings_button_pressed() -> void:
