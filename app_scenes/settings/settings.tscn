@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfwfhbuyhogvu"]
+
+[ext_resource type="Script" uid="uid://c3odk521oh5w8" path="res://app_scenes/settings/settings_scene.gd" id="1_x2hje"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_x2hje")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 260.0
+offset_bottom = 139.0
+text = "Settings"

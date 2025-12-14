@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dudng051k4jng"]
+[gd_scene load_steps=6 format=3 uid="uid://dudng051k4jng"]
 
-[ext_resource type="PackedScene" uid="uid://bb2maj4epqk6m" path="res://camera.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://bmhjw6sapxqbg" path="res://player.tscn" id="2_feb5d"]
+[ext_resource type="Script" uid="uid://dwwe7y2u35kfo" path="res://app_scenes/game/game_scene.gd" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://bb2maj4epqk6m" path="res://objects/camera.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://bmhjw6sapxqbg" path="res://objects/player.tscn" id="2_feb5d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80nbo"]
 
@@ -11,19 +12,33 @@ text = "Game Menu"
 font_size = 127
 uppercase = true
 
-[node name="Node3D" type="Node3D"]
+[node name="Game" type="Node3D"]
+script = ExtResource("1_feb5d")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
+[node name="CSGBox3D5" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+use_collision = true
+size = Vector3(100, 0.5, 100)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 25, 0)
+use_collision = true
+size = Vector3(1, 50, 100)
+
 [node name="CSGBox3D3" type="CSGBox3D" parent="StaticBody3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 25, -50)
+use_collision = true
 size = Vector3(1, 50, 100)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+use_collision = true
 size = Vector3(100, 0.5, 100)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 25, 0)
+use_collision = true
 size = Vector3(1, 50, 100)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
@@ -34,7 +49,7 @@ spot_range = 26.7376
 spot_angle = 25.0005
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.12599, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.12599, -2.7801843)
 mesh = SubResource("TextMesh_e2o6t")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -43,16 +58,8 @@ light_color = Color(1, 1, 0.882353, 1)
 light_energy = 9.081
 omni_range = 82.7578
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 25, 0)
-size = Vector3(1, 50, 100)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
-size = Vector3(100, 0.5, 100)
-
 [node name="Player" parent="." instance=ExtResource("2_feb5d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.74267, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.224, 1, -10.489)
 
 [node name="Camera" parent="." instance=ExtResource("2_e2o6t")]
 transform = Transform3D(1.02634, 0, 0, 0, 1.02634, 0, 0, 0, 1.02634, 0, 16.8158, 22.7084)
