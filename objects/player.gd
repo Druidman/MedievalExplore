@@ -4,18 +4,30 @@ extends CharacterBody3D
 
 const SPEED = 10.0
 const DECELERATION_SPEED = SPEED * 0.1
-const JUMP_VELOCITY = 4.5
+
+
+const JUMP_FORCE = 10 
+const GRAVITY_SPEED = 20
 
 var camera: Camera3D
+var upward_force = 0
 
 func _ready() -> void:
 	print("player ready")
 	camera = get_tree().current_scene.get_node("Camera")
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	rotation.y = camera.global_rotation.y
 	
-	var move_vec = Vector3(0,-1,0)
+	if is_on_floor():
+		velocity.y = 0
+	else:
+		velocity.y -= GRAVITY_SPEED * delta
+	
+	var move_vec = Vector3(0,0,0)
+	if Input.is_action_just_pressed("move_up") and is_on_floor():
+		velocity.y = JUMP_FORCE
+	
 	if Input.is_action_pressed("move_front"):
 		move_vec.z += -1
 	if Input.is_action_pressed("move_back"):
@@ -44,6 +56,9 @@ func _physics_process(_delta: float) -> void:
 		
 		velocity.x = move_toward(velocity.x, 0, DECELERATION_SPEED)
 		
-	velocity.y = move_vec.y
+#
+	#upward_force = move_toward(upward_force, 0, (GRAVITY_FACTOR/100.0) * upward_force)
+	#
+	#velocity.y = move_vec.y + upward_force
 	
 	move_and_slide()
