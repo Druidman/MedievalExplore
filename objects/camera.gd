@@ -36,7 +36,7 @@ func _input(event: InputEvent):
 	
 		
 
-func _process(delta: float) -> void: 
+func _process(_delta: float) -> void: 
 	print(player.global_position)
 	update_camera()
 	
