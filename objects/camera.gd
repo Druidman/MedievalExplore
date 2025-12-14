@@ -6,7 +6,7 @@ const cameraOffset = Vector3(0, 10,15)
 var angle: float = 0.0
 
 
-@onready var player = get_tree().current_scene.get_node("Player")
+var player
 
 func update_camera():
 	
@@ -24,7 +24,7 @@ func update_camera():
 	
 
 func _ready() -> void:
-	
+	player = get_tree().current_scene.get_node("Player")
 	look_at_from_position(position, player.global_position)
 	update_camera()
 	
@@ -37,7 +37,6 @@ func _input(event: InputEvent):
 		
 
 func _process(_delta: float) -> void: 
-	print(player.global_position)
 	update_camera()
 	
 	

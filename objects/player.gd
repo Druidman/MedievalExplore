@@ -6,9 +6,13 @@ const SPEED = 10.0
 const DECELERATION_SPEED = SPEED * 0.1
 const JUMP_VELOCITY = 4.5
 
-@onready var camera = get_tree().current_scene.get_node("Camera")
+var camera: Camera3D
 
-func _physics_process(delta: float) -> void:
+func _ready() -> void:
+	print("player ready")
+	camera = get_tree().current_scene.get_node("Camera")
+
+func _physics_process(_delta: float) -> void:
 	rotation.y = camera.global_rotation.y
 	
 	var move_vec = Vector3(0,-1,0)
@@ -39,5 +43,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		
 		velocity.x = move_toward(velocity.x, 0, DECELERATION_SPEED)
+		
+	velocity.y = move_vec.y
 	
 	move_and_slide()

@@ -39,9 +39,7 @@ light_energy = 9.081
 omni_range = 82.7578
 
 [node name="Player" parent="." instance=ExtResource("2_feb5d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.224, 1, -10.489)
-script = null
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.55974, 0)
 
 [node name="Camera" parent="." instance=ExtResource("2_e2o6t")]
-transform = Transform3D(1.02634, 0, 0, 0, 1.02634, 0, 0, 0, 1.02634, 0, 16.8158, 22.7084)
-script = null
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.253702, 15.195123, 0)
