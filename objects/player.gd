@@ -17,6 +17,7 @@ func _ready() -> void:
 	camera = get_tree().current_scene.get_node("Camera")
 
 func _physics_process(delta: float) -> void:
+	print(global_position)
 	rotation.y = camera.global_rotation.y
 	
 	if is_on_floor():

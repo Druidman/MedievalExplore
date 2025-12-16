@@ -15,12 +15,6 @@ uppercase = true
 [node name="Game" type="Node3D"]
 script = ExtResource("1_feb5d")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
-use_collision = true
-size = Vector3(100, 0.5, 100)
-
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.643656, 0.765315, 0, -0.765315, 0.643656, 0, 15.9278, 13.5405)
 light_color = Color(0.258824, 1, 1, 1)
@@ -42,4 +36,4 @@ omni_range = 82.7578
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60.315353, 0)
 
 [node name="Camera" parent="." instance=ExtResource("2_e2o6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.253702, 15.195123, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 72.38914, -20.493336)

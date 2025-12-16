@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnp6l1f5qnyp7"]
+
+[ext_resource type="Script" uid="uid://bw10r6i48e4gg" path="res://objects/block.gd" id="1_5tpor"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yfdi"]
+albedo_color = Color(0.46666667, 1, 0.3882353, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5tpor"]
+
+[node name="Block" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_5yfdi")
+mesh = SubResource("ArrayMesh_5tpor")
+script = ExtResource("1_5tpor")

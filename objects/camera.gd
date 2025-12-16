@@ -25,8 +25,7 @@ func update_camera():
 
 func _ready() -> void:
 	player = get_tree().current_scene.get_node("Player")
-	global_position = player.global_position + cameraOffset
-	look_at_from_position(position, player.global_position)
+	look_at_from_position(player.global_position + cameraOffset, player.global_position)
 	update_camera()
 	
 
