@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2tsu7d7l4pgf"]
+[gd_scene load_steps=12 format=3 uid="uid://c2tsu7d7l4pgf"]
 
 [ext_resource type="Script" uid="uid://clov5kbtha4kp" path="res://Game.cs" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://wcs5uq072562" path="res://castle.tscn" id="2_eow3j"]
 [ext_resource type="PackedScene" uid="uid://dmxcfq5emwyg1" path="res://player.tscn" id="2_fc0e3"]
+[ext_resource type="AudioStream" uid="uid://densrbmyye3b5" path="res://art/medieval-explore-game-song.ogg" id="2_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://djb01dupyxo0i" path="res://SlotMachine.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://lqqytvjrwlf6" path="res://Tree.tscn" id="5_7jktm"]
 
@@ -26,6 +27,13 @@ size = Vector3(100, 1, 100)
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_feb5d")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0576, -9.5, -13.159512)
+stream = ExtResource("2_j5wjh")
+volume_db = 8.02
+max_db = 6.0
+autoplay = true
 
 [node name="Player" parent="." instance=ExtResource("2_fc0e3")]
 
@@ -69,3 +77,51 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 28.815454, -9.5, 31.051
 
 [node name="Tree6" parent="." instance=ExtResource("5_7jktm")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 16.534, -9.5, -30.540222)
+
+[node name="Tree7" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -32.13336, -9.5, -13.159512)
+
+[node name="Tree8" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -8.6000805, -9.5, -41.4366)
+
+[node name="Tree9" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -10.854891, -9.5, -13.159512)
+
+[node name="Tree10" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 1.4209213, -9.5, -27.62376)
+
+[node name="Tree11" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -27.231724, -9.5, -41.276264)
+
+[node name="Tree12" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -24.2269, -9.5, -24.386421)
+
+[node name="Tree13" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -10.854891, -9.5, -24.77406)
+
+[node name="Tree14" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -41.438126, -9.5, -30.784252)
+
+[node name="Tree15" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 38.124413, -9.5, -27.62376)
+
+[node name="Tree16" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 26.190718, -9.5, -40.319935)
+
+[node name="Tree17" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 38.734, -9.5, 19.555195)
+
+[node name="Tree18" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 1.4209213, -9.5, 36.455242)
+
+[node name="Tree19" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -36.545998, -9.5, 32.326756)
+
+[node name="Tree20" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -17.802406, -9.5, 41.66303)
+
+[node name="Tree21" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -34.141533, -9.5, 7.453377)
+
+[node name="Tree22" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -13.29668, 2.2967377, 15.543032)

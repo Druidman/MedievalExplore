@@ -32,7 +32,6 @@ public partial class SlotMachine : StaticBody3D
 		if (inputEvent.IsActionPressed("ToggleSlotMachineUi") && playerIn)
 		{
 			if (this.rolling) return;
-			
 			if (this.ui.Visible)
 			{
 				
