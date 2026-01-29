@@ -1,0 +1,219 @@
+[gd_scene load_steps=9 format=3 uid="uid://djb01dupyxo0i"]
+
+[ext_resource type="ArrayMesh" uid="uid://b0vs72wonk6v" path="res://SlotMachineMesh.res" id="1_2fvob"]
+[ext_resource type="Script" uid="uid://s3ctrhbq86lr" path="res://SlotMachine.cs" id="1_3qqdm"]
+[ext_resource type="Texture2D" uid="uid://cmaplypaymm3l" path="res://art/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="3_x2n3p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2fvob"]
+size = Vector3(2, 3.2, 2)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2fvob"]
+radius = 5.0
+
+[sub_resource type="TextMesh" id="TextMesh_3qqdm"]
+text = "Click \"space\" to play!"
+font_size = 106
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x2n3p"]
+texture = ExtResource("3_x2n3p")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(709, 36, 22, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f8utl"]
+texture = ExtResource("3_x2n3p")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(741, 38, 22, 22)
+
+[node name="SlotMachine" type="StaticBody3D" node_paths=PackedStringArray("instructionText", "ui", "rollTimer", "slots")]
+script = ExtResource("1_3qqdm")
+instructionText = NodePath("InstructionText")
+ui = NodePath("Ui")
+rollTimer = NodePath("Timer")
+slots = [NodePath("Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect3/Label"), NodePath("Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect2/Label"), NodePath("Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect/Label")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, 0.2, 0, -0.2, -8.742278e-09, -0.2, 0, -0.4)
+mesh = ExtResource("1_2fvob")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+shape = SubResource("BoxShape3D_2fvob")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_2fvob")
+
+[node name="InstructionText" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.8462555, 0)
+mesh = SubResource("TextMesh_3qqdm")
+
+[node name="Ui" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -11.0
+offset_right = -10.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Ui"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_x2n3p")
+region_rect = Rect2(163, 178, 90, 27)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -125.0
+offset_right = 225.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="CenterContainer" type="CenterContainer" parent="Ui/NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/NinePatchRect/MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+texture = ExtResource("3_x2n3p")
+region_rect = Rect2(11, 59, 26, 28)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer3/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Roll - 5 coins"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_x2n3p")
+region_rect = Rect2(709, 36, 22, 24)
+
+[node name="Label" type="Label" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_x2n3p")
+region_rect = Rect2(709, 36, 22, 24)
+
+[node name="Label" type="Label" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_x2n3p")
+region_rect = Rect2(709, 36, 22, 24)
+
+[node name="Label" type="Label" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+
+[node name="Button" type="Button" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_x2n3p")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_x2n3p")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f8utl")
+text = "Roll"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="Area3D" to="." method="OnBodyExited"]
+[connection signal="pressed" from="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button" to="." method="OnRollPressed"]
+[connection signal="timeout" from="Timer" to="." method="OnRollEnd"]

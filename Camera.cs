@@ -30,6 +30,8 @@ public partial class Camera : Camera3D
 
 	public override void _Input(InputEvent @event)
 	{
+		if (this.player.eventsBlocked) return;
+		
 		if (@event is InputEventMouseMotion motion)
 		{
 			angle -= motion.Relative.X * 0.01f;

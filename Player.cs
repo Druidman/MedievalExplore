@@ -9,34 +9,49 @@ public partial class Player : CharacterBody3D
 	private const float JUMP_FORCE = 10f;
 	private const float GRAVITY_SPEED = 20f;
 
+	Godot.Vector3 velocity;
 	[Export]
 	public Camera3D camera;
 	private float upward_force = 0f;
+
+
+	public bool eventsBlocked = false;
+
+	public int coins {get; protected set; } = 5;
+
+
+	public void AddCoins(int amountToAdd)
+	{
+		if (amountToAdd < 0) return;
+
+		this.coins += amountToAdd;
+	}
+
+	public void TakeCoins(int amountToRemove)
+	{
+		if (amountToRemove < 0) return;
+
+		this.coins -= amountToRemove;
+	}
 
 	public override void _Ready()
 	{
 		GD.Print("player ready");
 	}
-	
-	public override void _PhysicsProcess(double delta)
+
+	public void BlockEvents()
 	{
-		if (!Input.IsActionPressed("freeCamera"))
-		{
-			Rotation = new Vector3(Rotation.X, camera.GlobalRotation.Y, Rotation.Z);
-		}
-		
+		this.eventsBlocked = true;
+	}
 
-		Vector3 velocity = Velocity;
+	public void UnblockEvents()
+	{
+		this.eventsBlocked = false;
+	}
+	
 
-		if (IsOnFloor())
-		{
-			velocity.Y = 0;
-		}
-		else
-		{
-			velocity.Y -= GRAVITY_SPEED * (float)delta;
-		}
-
+	public void HandleMovement()
+	{
 		Vector3 moveVec = Vector3.Zero;
 
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
@@ -74,11 +89,38 @@ public partial class Player : CharacterBody3D
 		{
 			velocity.X = Mathf.MoveToward(velocity.X, 0, DECELERATION_SPEED);
 		}
+	}
+	public override void _PhysicsProcess(double delta)
+	{
+		
+		if (IsOnFloor())
+		{
+			velocity.Y = 0;
+		}
+		else
+		{
+			velocity.Y -= GRAVITY_SPEED * (float)delta;
+		}
 
-		// upward_force and related logic remain commented out exactly
-		// upward_force = move_toward(upward_force, 0, (GRAVITY_FACTOR / 100.0) * upward_force)
-		// velocity.y = move_vec.y + upward_force
+		if (!this.eventsBlocked)
+		{
+			if (!Input.IsActionPressed("freeCamera"))
+			{
+				Rotation = new Vector3(Rotation.X, camera.GlobalRotation.Y, Rotation.Z);
+			}
 
+
+
+			this.HandleMovement();
+		}
+
+		velocity.Z = Mathf.MoveToward(velocity.Z, 0, DECELERATION_SPEED);
+		velocity.X = Mathf.MoveToward(velocity.X, 0, DECELERATION_SPEED);
+		
+
+		
+
+		
 		Velocity = velocity;
 		MoveAndSlide();
 	}

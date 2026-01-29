@@ -1,10 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2tsu7d7l4pgf"]
+[gd_scene load_steps=11 format=3 uid="uid://c2tsu7d7l4pgf"]
 
-[ext_resource type="Script" uid="uid://dcf3bbiw8xgr" path="res://Camera.cs" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://clov5kbtha4kp" path="res://Game.cs" id="1_feb5d"]
-[ext_resource type="Script" uid="uid://3exxb7dwfykf" path="res://Player.cs" id="2_feb5d"]
-[ext_resource type="ArrayMesh" uid="uid://dgmr4lemo7xb4" path="res://PlayerModelMesh.res" id="4_7jktm"]
-[ext_resource type="Script" uid="uid://dakhuxu2syq0s" path="res://dialogArea.cs" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://wcs5uq072562" path="res://castle.tscn" id="2_eow3j"]
+[ext_resource type="PackedScene" uid="uid://dmxcfq5emwyg1" path="res://player.tscn" id="2_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://djb01dupyxo0i" path="res://SlotMachine.tscn" id="2_ryrav"]
+[ext_resource type="PackedScene" uid="uid://lqqytvjrwlf6" path="res://Tree.tscn" id="5_7jktm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mwb40"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,27 +18,23 @@ background_mode = 2
 sky = SubResource("Sky_80nbo")
 tonemap_mode = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fc0e3"]
-size = Vector3(1, 3, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_feb5d"]
-size = Vector3(1.5, 1, 1.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fc0e3"]
-albedo_color = Color(0.4627451, 1, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7jktm"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2o6t"]
 size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fc0e3"]
 size = Vector3(100, 1, 100)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7jktm"]
-
 [node name="Game" type="Node3D"]
 script = ExtResource("1_feb5d")
+
+[node name="Player" parent="." instance=ExtResource("2_fc0e3")]
+
+[node name="Castle" parent="." instance=ExtResource("2_eow3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.596, -9.5, 14.989)
+
+[node name="SlotMachine" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_ryrav")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.526, -9.5, 0)
+player = NodePath("../Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -46,44 +42,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e2o6t")
-
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.0542645)
-script = ExtResource("1_e2o6t")
-player = NodePath("../CharacterBody3D")
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
-script = ExtResource("2_feb5d")
-camera = NodePath("../Camera3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(-8.742278e-09, -0.2, -8.742278e-09, 0, -8.742278e-09, 0.2, -0.2, 8.742278e-09, 3.821371e-16, 0.3, 0, 0)
-mesh = ExtResource("4_7jktm")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.5, 0)
-shape = SubResource("BoxShape3D_fc0e3")
-
-[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("dialog", "player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -8.5, -3)
-script = ExtResource("4_fc0e3")
-dialog = NodePath("Label3D")
-player = NodePath("../CharacterBody3D")
-
-[node name="Label3D" type="Label3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-visible = false
-modulate = Color(0.99607843, 0.34509805, 0.101960786, 1)
-text = "Ale goated cn "
-font_size = 256
-outline_size = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("BoxShape3D_feb5d")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
-material_override = SubResource("StandardMaterial3D_fc0e3")
-mesh = SubResource("BoxMesh_7jktm")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
@@ -94,11 +52,20 @@ shape = SubResource("BoxShape3D_e2o6t")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_fc0e3")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+[node name="Tree" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 16.534, -9.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -8.5, -3)
-shape = SubResource("BoxShape3D_7jktm")
+[node name="Tree2" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 12.330603, -9.5, 17.484825)
 
-[connection signal="body_entered" from="Area3D" to="Area3D" method="EnteredDialogArea"]
-[connection signal="body_exited" from="Area3D" to="Area3D" method="ExitedDialogArea"]
+[node name="Tree3" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 20.0576, -9.5, -13.159512)
+
+[node name="Tree4" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 32.412346, -9.5, 0)
+
+[node name="Tree5" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 28.815454, -9.5, 31.051294)
+
+[node name="Tree6" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 16.534, -9.5, -30.540222)
