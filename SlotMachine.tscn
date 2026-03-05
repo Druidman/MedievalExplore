@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://djb01dupyxo0i"]
+[gd_scene load_steps=10 format=3 uid="uid://djb01dupyxo0i"]
 
 [ext_resource type="ArrayMesh" uid="uid://b0vs72wonk6v" path="res://SlotMachineMesh.res" id="1_2fvob"]
 [ext_resource type="Script" uid="uid://s3ctrhbq86lr" path="res://SlotMachine.cs" id="1_3qqdm"]
 [ext_resource type="Texture2D" uid="uid://cmaplypaymm3l" path="res://art/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="3_x2n3p"]
+[ext_resource type="AudioStream" uid="uid://densrbmyye3b5" path="res://art/medieval-explore-game-song.ogg" id="4_f8utl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2fvob"]
 size = Vector3(2, 3.2, 2)
@@ -35,7 +36,7 @@ script = ExtResource("1_3qqdm")
 instructionText = NodePath("InstructionText")
 ui = NodePath("Ui")
 rollTimer = NodePath("Timer")
-slots = [NodePath("Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect3/Label"), NodePath("Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect2/Label"), NodePath("Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect/Label")]
+slots = [NodePath("Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect3/Label"), NodePath("Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect2/Label"), NodePath("Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect/Label")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, 0.2, 0, -0.2, -8.742278e-09, -0.2, 0, -0.4)
@@ -89,37 +90,43 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="Ui/NinePatchRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/NinePatchRect"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -225.0
-offset_top = -125.0
-offset_right = 225.0
-offset_bottom = 125.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Button2" type="Button" parent="Ui/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_x2n3p")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_x2n3p")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f8utl")
+text = "x"
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/NinePatchRect/VBoxContainer"]
+layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="CenterContainer" type="CenterContainer" parent="Ui/NinePatchRect/MarginContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Ui/NinePatchRect/MarginContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer3"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 texture = ExtResource("3_x2n3p")
@@ -129,7 +136,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="Label" type="Label" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer3/NinePatchRect"]
+[node name="Label" type="Label" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer3/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -140,19 +147,19 @@ text = "Roll - 5 coins"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 100
 
-[node name="NinePatchRect3" type="NinePatchRect" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+[node name="NinePatchRect3" type="NinePatchRect" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("3_x2n3p")
 region_rect = Rect2(709, 36, 22, 24)
 
-[node name="Label" type="Label" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect3"]
+[node name="Label" type="Label" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,13 +170,13 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("3_x2n3p")
 region_rect = Rect2(709, 36, 22, 24)
 
-[node name="Label" type="Label" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect2"]
+[node name="Label" type="Label" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,13 +187,13 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("3_x2n3p")
 region_rect = Rect2(709, 36, 22, 24)
 
-[node name="Label" type="Label" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect"]
+[node name="Label" type="Label" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,13 +204,13 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 100
 
-[node name="Button" type="Button" parent="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_x2n3p")
@@ -213,7 +220,14 @@ text = "Roll"
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3129907, 0)
+stream = ExtResource("4_f8utl")
+autoplay = true
+max_distance = 1352.08
+
 [connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
 [connection signal="body_exited" from="Area3D" to="." method="OnBodyExited"]
-[connection signal="pressed" from="Ui/NinePatchRect/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button" to="." method="OnRollPressed"]
+[connection signal="pressed" from="Ui/NinePatchRect/VBoxContainer/Button2" to="." method="closeUi"]
+[connection signal="pressed" from="Ui/NinePatchRect/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button" to="." method="OnRollPressed"]
 [connection signal="timeout" from="Timer" to="." method="OnRollEnd"]

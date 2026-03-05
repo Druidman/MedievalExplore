@@ -14,6 +14,11 @@ public partial class MainMenu : Control
 	{
 		GetTree().ChangeSceneToFile("res://game.tscn");
 	}
+
+  public override void _Ready()
+  {
+	Input.MouseMode = Input.MouseModeEnum.Visible;
+  }
 	public void OnSettings()
 	{
 		settings.Visible = true;

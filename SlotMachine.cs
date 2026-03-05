@@ -26,7 +26,17 @@ public partial class SlotMachine : StaticBody3D
 
 	bool playerIn = false;
 
+	public void closeUi()
+	{
 
+		if (this.rolling) return;
+
+		this.ui.Visible = false;
+
+		this.player.UnblockEvents();
+				
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+	}
 	public override void _Input(InputEvent inputEvent)
 	{
 		if (inputEvent.IsActionPressed("ToggleSlotMachineUi") && playerIn)

@@ -1,127 +1,68 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2tsu7d7l4pgf"]
+[gd_scene load_steps=15 format=3 uid="uid://c2tsu7d7l4pgf"]
 
 [ext_resource type="Script" uid="uid://clov5kbtha4kp" path="res://Game.cs" id="1_feb5d"]
-[ext_resource type="PackedScene" uid="uid://wcs5uq072562" path="res://castle.tscn" id="2_eow3j"]
-[ext_resource type="PackedScene" uid="uid://dmxcfq5emwyg1" path="res://player.tscn" id="2_fc0e3"]
-[ext_resource type="AudioStream" uid="uid://densrbmyye3b5" path="res://art/medieval-explore-game-song.ogg" id="2_j5wjh"]
-[ext_resource type="PackedScene" uid="uid://djb01dupyxo0i" path="res://SlotMachine.tscn" id="2_ryrav"]
-[ext_resource type="PackedScene" uid="uid://lqqytvjrwlf6" path="res://Tree.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://s0sr5iqi38n7" path="res://Objects/tile.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://buuwb30d2gcke" path="res://Objects/player.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://cuej7ogb3gs54" path="res://Objects/TreeSeed.tscn" id="3_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://dpkqtk51lag58" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_A.gltf" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c5ct8q4tc65wf" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_B_trees.gltf" id="5_eow3j"]
+[ext_resource type="PackedScene" uid="uid://dii3ydxm2ju6p" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C.gltf" id="6_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://c3omws2hfcrrv" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C_trees.gltf" id="7_vef74"]
+[ext_resource type="PackedScene" uid="uid://bm6uqrxujag6r" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hill_single_B.gltf" id="8_vef74"]
+[ext_resource type="PackedScene" uid="uid://djb01dupyxo0i" path="res://SlotMachine.tscn" id="9_vef74"]
+[ext_resource type="PackedScene" uid="uid://bkhwv2vn4l8ry" path="res://Objects/tree.tscn" id="10_hve3p"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mwb40"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_feb5d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_80nbo"]
-sky_material = SubResource("ProceduralSkyMaterial_mwb40")
+[sub_resource type="Sky" id="Sky_fc0e3"]
+sky_material = SubResource("ProceduralSkyMaterial_feb5d")
 
-[sub_resource type="Environment" id="Environment_e2o6t"]
+[sub_resource type="Environment" id="Environment_7jktm"]
 background_mode = 2
-sky = SubResource("Sky_80nbo")
+sky = SubResource("Sky_fc0e3")
 tonemap_mode = 2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_e2o6t"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxMesh" id="BoxMesh_fc0e3"]
-size = Vector3(100, 1, 100)
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_feb5d")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0576, -9.5, -13.159512)
-stream = ExtResource("2_j5wjh")
-volume_db = 8.02
-max_db = 6.0
-autoplay = true
-
-[node name="Player" parent="." instance=ExtResource("2_fc0e3")]
-
-[node name="Castle" parent="." instance=ExtResource("2_eow3j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.596, -9.5, 14.989)
-
-[node name="SlotMachine" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_ryrav")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.526, -9.5, 0)
-player = NodePath("../Player")
+tileScene = ExtResource("2_e2o6t")
+treeSeedScene = ExtResource("3_mfdv2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_e2o6t")
+environment = SubResource("Environment_7jktm")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+[node name="Player" parent="." instance=ExtResource("3_feb5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.897156, 0)
+treeScene = ExtResource("10_hve3p")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_e2o6t")
+[node name="hills_A2" parent="." instance=ExtResource("4_fc0e3")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_fc0e3")
+[node name="hills_B_trees2" parent="." instance=ExtResource("5_eow3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7571745, 0.03783369, 0.7022897)
 
-[node name="Tree" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 16.534, -9.5, 0)
+[node name="hills_C2" parent="." instance=ExtResource("6_j5wjh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4131787, 0, 0)
 
-[node name="Tree2" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 12.330603, -9.5, 17.484825)
+[node name="hills_C_trees2" parent="." instance=ExtResource("7_vef74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19450402, 0, -1.2849839)
 
-[node name="Tree3" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 20.0576, -9.5, -13.159512)
+[node name="hill_single_B2" parent="." instance=ExtResource("8_vef74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1434162, 0, -0.31295252)
 
-[node name="Tree4" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 32.412346, -9.5, 0)
+[node name="hill_single_B3" parent="." instance=ExtResource("8_vef74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.86380315, 0, -0.31295252)
 
-[node name="Tree5" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 28.815454, -9.5, 31.051294)
+[node name="SlotMachine" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_vef74")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.2122634, 0.69278264, 0)
+player = NodePath("../Player")
 
-[node name="Tree6" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 16.534, -9.5, -30.540222)
+[node name="seedSpawner" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
 
-[node name="Tree7" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -32.13336, -9.5, -13.159512)
-
-[node name="Tree8" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -8.6000805, -9.5, -41.4366)
-
-[node name="Tree9" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -10.854891, -9.5, -13.159512)
-
-[node name="Tree10" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 1.4209213, -9.5, -27.62376)
-
-[node name="Tree11" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -27.231724, -9.5, -41.276264)
-
-[node name="Tree12" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -24.2269, -9.5, -24.386421)
-
-[node name="Tree13" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -10.854891, -9.5, -24.77406)
-
-[node name="Tree14" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -41.438126, -9.5, -30.784252)
-
-[node name="Tree15" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 38.124413, -9.5, -27.62376)
-
-[node name="Tree16" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 26.190718, -9.5, -40.319935)
-
-[node name="Tree17" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 38.734, -9.5, 19.555195)
-
-[node name="Tree18" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 1.4209213, -9.5, 36.455242)
-
-[node name="Tree19" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -36.545998, -9.5, 32.326756)
-
-[node name="Tree20" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -17.802406, -9.5, 41.66303)
-
-[node name="Tree21" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -34.141533, -9.5, 7.453377)
-
-[node name="Tree22" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -13.29668, 2.2967377, 15.543032)
+[connection signal="timeout" from="seedSpawner" to="." method="SpawnSeed"]

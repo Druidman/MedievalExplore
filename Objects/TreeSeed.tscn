@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuej7ogb3gs54"]
+
+[ext_resource type="PackedScene" uid="uid://b8cu4v0tiiord" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/waterplant_C.gltf" id="1_78l7o"]
+[ext_resource type="Script" uid="uid://b2y0nebyhdr6d" path="res://Objects/TreeSeed.cs" id="1_fn3tx"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fn3tx"]
+height = 0.2
+radius = 0.1
+
+[node name="TreeSeed" type="Node3D"]
+script = ExtResource("1_fn3tx")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("CylinderShape3D_fn3tx")
+
+[node name="waterplant_C2" parent="." instance=ExtResource("1_78l7o")]
+
+[connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="Area3D" to="." method="OnBodyExited"]
