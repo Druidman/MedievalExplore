@@ -4,10 +4,32 @@ using System;
 public partial class Settings : Control
 {
 	[Export]
-	Control mainMenu;
-	public void OnReturn()
+	Slider musicVolume;
+
+	[Export]
+	Slider soundEffectsVolume;
+
+	[Signal]
+  public delegate void OnSettingsReturnEventHandler();
+
+	public void onReturn()
 	{
-		this.Visible = false;
-		mainMenu.Visible = true;
+		EmitSignal(SignalName.OnSettingsReturn);
 	}
+
+  public override void _Ready()
+  {
+	musicVolume.Value = GameGlobals.musicVolume;
+		soundEffectsVolume.Value = GameGlobals.soundEffectsVolume;
+  }
+
+  public void onMusicSliderChange(float value)
+	{
+		GameGlobals.musicVolume = value;
+	}
+	public void onSoundEffectsChange(float value)
+	{
+		GameGlobals.soundEffectsVolume = value;
+	}
+	
 }
