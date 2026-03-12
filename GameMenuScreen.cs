@@ -7,23 +7,39 @@ public partial class GameMenuScreen : Node3D
 
 	[Export]
 	Settings settings;
+
+	[Export]
+	PackedScene gameScene;
   // Called when the node enters the scene tree for the first time.
 
 	World3DButton lastHoveredButton = null;
 
+	[Export]
+	AudioStreamPlayer3D audioPlayer;
+
   public override void _Input(InputEvent inputEvent)
   {
 	if (settings.Visible) return;
+	if (inputEvent.IsActionPressed("spaceClick"))
+		{
+			audioPlayer.Stop(); 
+			audioPlayer.Play();
+			GetTree().ChangeSceneToPacked(gameScene);
+		}
 	if (inputEvent.IsActionPressed("mouseClick"))
 		{
 			Area3D area = this.GetAreaUnderMouse();
 
 			if (area is SettingsButton areaB)
 			{
+				audioPlayer.Stop();
+				audioPlayer.Play();
 				settings.Visible = true;
 			}
 			if (area is ExitButton areaE)
 			{
+				audioPlayer.Stop();
+				audioPlayer.Play();
 				GetTree().Quit();
 			}
 		}

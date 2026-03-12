@@ -18,6 +18,9 @@ public partial class Game : Node3D
 
 	[Export]
 	PackedScene treeSeedScene = null;
+
+	[Export]
+	PackedScene mainMenuScene;
 	
 	public override void _Ready()
 	{
@@ -44,7 +47,8 @@ public partial class Game : Node3D
 		if (inputEvent.IsActionPressed("return"))
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
-			GetTree().ChangeSceneToFile("res://gameMenu.tscn");
+			// GetTree().ChangeSceneToPacked(mainMenuScene);
+			GetTree().ChangeSceneToFile("res://game_menu_screen.tscn");
 		}
 		
 	}

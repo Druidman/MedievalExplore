@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://myh1j1w8pdts"]
+[gd_scene load_steps=23 format=3 uid="uid://myh1j1w8pdts"]
 
 [ext_resource type="PackedScene" uid="uid://dpkqtk51lag58" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_A.gltf" id="1_h2bto"]
 [ext_resource type="Script" uid="uid://cb8jmj07maxoe" path="res://GameMenuScreen.cs" id="1_xnq5w"]
+[ext_resource type="PackedScene" uid="uid://c2tsu7d7l4pgf" path="res://game.tscn" id="2_i0x2x"]
 [ext_resource type="PackedScene" uid="uid://c5ct8q4tc65wf" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_B_trees.gltf" id="2_ybmwl"]
 [ext_resource type="PackedScene" uid="uid://dii3ydxm2ju6p" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C.gltf" id="3_xnq5w"]
 [ext_resource type="PackedScene" uid="uid://c3omws2hfcrrv" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C_trees.gltf" id="4_yylvn"]
@@ -10,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://ch26hkqa0wixd" path="res://settings.tscn" id="7_ybmwl"]
 [ext_resource type="Script" uid="uid://bv0po376ietnu" path="res://ExitButton.cs" id="8_rom4e"]
 [ext_resource type="Script" uid="uid://c3xcopnx8cgrl" path="res://SettingsButton.cs" id="9_i0x2x"]
+[ext_resource type="AudioStream" uid="uid://b2aafdghubkfa" path="res://assets/buttonClick.mp3" id="12_nycqf"]
+[ext_resource type="Script" uid="uid://52glmdijdjky" path="res://SfxPlayer.cs" id="13_5c10u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5c10u"]
 albedo_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
@@ -43,9 +46,11 @@ background_mode = 2
 sky = SubResource("Sky_fc0e3")
 tonemap_mode = 2
 
-[node name="GameMenuScreen" type="Node3D" node_paths=PackedStringArray("settings")]
+[node name="GameMenuScreen" type="Node3D" node_paths=PackedStringArray("settings", "audioPlayer")]
 script = ExtResource("1_xnq5w")
 settings = NodePath("Settings")
+gameScene = ExtResource("2_i0x2x")
+audioPlayer = NodePath("AudioStreamPlayer3D")
 
 [node name="Terrain" type="Node3D" parent="."]
 
@@ -205,6 +210,8 @@ offset_left = 940.0
 offset_top = 520.0
 offset_right = 980.0
 offset_bottom = 520.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -212,5 +219,10 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rom4e")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_nycqf")
+autoplay = true
+script = ExtResource("13_5c10u")
 
 [connection signal="OnSettingsReturn" from="Settings" to="." method="onSettingsReturn"]

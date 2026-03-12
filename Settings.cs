@@ -3,8 +3,6 @@ using System;
 
 public partial class Settings : Control
 {
-	[Export]
-	Slider musicVolume;
 
 	[Export]
 	Slider soundEffectsVolume;
@@ -19,17 +17,33 @@ public partial class Settings : Control
 
   public override void _Ready()
   {
-	musicVolume.Value = GameGlobals.musicVolume;
-		soundEffectsVolume.Value = GameGlobals.soundEffectsVolume;
+		
+
+		_busIndex = AudioServer.GetBusIndex(BusName);
+
+		// Initialize the slider to the current volume
+		float currentDb = AudioServer.GetBusVolumeDb(_busIndex);
+		soundEffectsVolume.Value = Mathf.DbToLinear(currentDb);
   }
 
-  public void onMusicSliderChange(float value)
-	{
-		GameGlobals.musicVolume = value;
-	}
 	public void onSoundEffectsChange(float value)
 	{
-		GameGlobals.soundEffectsVolume = value;
+
+		GD.Print("siema");
+		// Convert the 0.0 - 1.0 slider value to Decibels (dB)
+		// Mathf.LinearToDb handles the logarithmic conversion for you
+		float dbValue = (float)Mathf.LinearToDb(value);
+		
+		AudioServer.SetBusVolumeDb(_busIndex, dbValue);
+
+		// Mute the bus entirely if the slider is at 0
+		AudioServer.SetBusMute(_busIndex, value <= 0);
 	}
+
+
+	// The name of the Bus in the Audio tab (usually "Master")
+	[Export] public string BusName = "Master";
+	private int _busIndex;
+
 	
 }

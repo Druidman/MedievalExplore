@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b14vp6gd6r0py" path="res://Settings.cs" id="1_x2hje"]
 
-[node name="Settings" type="Control" node_paths=PackedStringArray("musicVolume", "soundEffectsVolume")]
+[node name="Settings" type="Control" node_paths=PackedStringArray("soundEffectsVolume")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,7 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x2hje")
-musicVolume = NodePath("CenterContainer/VBoxContainer/VBoxContainer2/HSlider")
 soundEffectsVolume = NodePath("CenterContainer/VBoxContainer/VBoxContainer/HSlider")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -25,23 +24,12 @@ grow_vertical = 2
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Music"
-
-[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 1
-
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Sound effects"
+text = "Volume (careful ;D)"
 
 [node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -51,6 +39,5 @@ size_flags_vertical = 1
 layout_mode = 2
 text = "Return"
 
-[connection signal="value_changed" from="CenterContainer/VBoxContainer/VBoxContainer2/HSlider" to="." method="onMusicSliderChange"]
-[connection signal="value_changed" from="CenterContainer/VBoxContainer/VBoxContainer/HSlider" to="." method="onSoundEffectsSliderChange"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/VBoxContainer/HSlider" to="." method="onSoundEffectsChange"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="onReturn"]
