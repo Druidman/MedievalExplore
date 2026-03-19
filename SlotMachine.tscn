@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://djb01dupyxo0i"]
+[gd_scene load_steps=12 format=3 uid="uid://djb01dupyxo0i"]
 
 [ext_resource type="ArrayMesh" uid="uid://b0vs72wonk6v" path="res://SlotMachineMesh.res" id="1_2fvob"]
 [ext_resource type="Script" uid="uid://s3ctrhbq86lr" path="res://SlotMachine.cs" id="1_3qqdm"]
 [ext_resource type="Texture2D" uid="uid://cmaplypaymm3l" path="res://art/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="3_x2n3p"]
 [ext_resource type="AudioStream" uid="uid://densrbmyye3b5" path="res://art/medieval-explore-game-song.ogg" id="4_f8utl"]
+[ext_resource type="Script" uid="uid://dvbr3vugupffq" path="res://MusicPlayer.cs" id="5_vq7nl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2fvob"]
 size = Vector3(2, 3.2, 2)
@@ -228,6 +229,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3129907, 0)
 stream = ExtResource("4_f8utl")
 autoplay = true
 max_distance = 1352.08
+script = ExtResource("5_vq7nl")
 
 [connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
 [connection signal="body_exited" from="Area3D" to="." method="OnBodyExited"]

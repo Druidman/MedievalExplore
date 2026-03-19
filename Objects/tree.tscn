@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkhwv2vn4l8ry"]
+[gd_scene load_steps=8 format=3 uid="uid://bkhwv2vn4l8ry"]
 
 [ext_resource type="PackedScene" uid="uid://lupur78psli8" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/tree_single_A.gltf" id="1_i4ofe"]
 [ext_resource type="Script" uid="uid://2h4xvk6g8jll" path="res://Objects/Tree.cs" id="1_qca5r"]
 [ext_resource type="AudioStream" uid="uid://bl2k5jdmsojfb" path="res://assets/rombanie.mp3" id="3_auw0v"]
+[ext_resource type="Script" uid="uid://52glmdijdjky" path="res://SfxPlayer.cs" id="4_h6a8n"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qca5r"]
 size = Vector3(0.05, 0.05, 0.05)
@@ -51,6 +52,7 @@ shape = SubResource("CylinderShape3D_qca5r")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_auw0v")
+script = ExtResource("4_h6a8n")
 
 [connection signal="timeout" from="Timer" to="." method="OnGrown"]
 [connection signal="timeout" from="Timer2" to="." method="OnDestroyEnd"]
