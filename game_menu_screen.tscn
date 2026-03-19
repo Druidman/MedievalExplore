@@ -1,18 +1,34 @@
-[gd_scene load_steps=23 format=3 uid="uid://myh1j1w8pdts"]
+[gd_scene load_steps=30 format=3 uid="uid://myh1j1w8pdts"]
 
 [ext_resource type="PackedScene" uid="uid://dpkqtk51lag58" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_A.gltf" id="1_h2bto"]
 [ext_resource type="Script" uid="uid://cb8jmj07maxoe" path="res://GameMenuScreen.cs" id="1_xnq5w"]
 [ext_resource type="PackedScene" uid="uid://c2tsu7d7l4pgf" path="res://game.tscn" id="2_i0x2x"]
 [ext_resource type="PackedScene" uid="uid://c5ct8q4tc65wf" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_B_trees.gltf" id="2_ybmwl"]
+[ext_resource type="PackedScene" uid="uid://dop04vseyjy6r" path="res://SlotMachine.gltf" id="3_iy702"]
+[ext_resource type="PackedScene" uid="uid://b0oxg2jumunta" path="res://CharacterModel.tscn" id="3_x30af"]
 [ext_resource type="PackedScene" uid="uid://dii3ydxm2ju6p" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C.gltf" id="3_xnq5w"]
+[ext_resource type="Script" uid="uid://cuuy4221aqtdc" path="res://CharacterViewer.cs" id="4_70q8c"]
+[ext_resource type="Script" uid="uid://1p852vtnqy6" path="res://NextButton.cs" id="4_iy702"]
 [ext_resource type="PackedScene" uid="uid://c3omws2hfcrrv" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C_trees.gltf" id="4_yylvn"]
 [ext_resource type="PackedScene" uid="uid://bm6uqrxujag6r" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hill_single_B.gltf" id="5_rom4e"]
-[ext_resource type="PackedScene" uid="uid://djb01dupyxo0i" path="res://SlotMachine.tscn" id="6_i0x2x"]
 [ext_resource type="PackedScene" uid="uid://ch26hkqa0wixd" path="res://settings.tscn" id="7_ybmwl"]
 [ext_resource type="Script" uid="uid://bv0po376ietnu" path="res://ExitButton.cs" id="8_rom4e"]
 [ext_resource type="Script" uid="uid://c3xcopnx8cgrl" path="res://SettingsButton.cs" id="9_i0x2x"]
 [ext_resource type="AudioStream" uid="uid://b2aafdghubkfa" path="res://assets/buttonClick.mp3" id="12_nycqf"]
 [ext_resource type="Script" uid="uid://52glmdijdjky" path="res://SfxPlayer.cs" id="13_5c10u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x30af"]
+
+[sub_resource type="TextMesh" id="TextMesh_70q8c"]
+material = SubResource("StandardMaterial3D_x30af")
+text = ">"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_efkcr"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="TextMesh" id="TextMesh_iy702"]
+text = "Press \"space\""
+font_size = 11
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5c10u"]
 albedo_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
@@ -46,11 +62,37 @@ background_mode = 2
 sky = SubResource("Sky_fc0e3")
 tonemap_mode = 2
 
-[node name="GameMenuScreen" type="Node3D" node_paths=PackedStringArray("settings", "audioPlayer")]
+[node name="GameMenuScreen" type="Node3D" node_paths=PackedStringArray("settings", "characterViewer", "audioPlayer")]
 script = ExtResource("1_xnq5w")
 settings = NodePath("Settings")
 gameScene = ExtResource("2_i0x2x")
+characterViewer = NodePath("CharacterViewer")
 audioPlayer = NodePath("AudioStreamPlayer3D")
+
+[node name="CharacterViewer" parent="." instance=ExtResource("3_x30af")]
+transform = Transform3D(0.02443221, 0, 0.9997015, 0, 1, 0, -0.9997015, 0, 0.02443221, 1.0616727, 0.4491819, -0.4908679)
+script = ExtResource("4_70q8c")
+
+[node name="NextText" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.12018879, 0, 0.9927511, 0, 1, 0, -0.9927511, 0, -0.12018879, 1.0740813, 0.9996332, -0.48893148)
+mesh = SubResource("TextMesh_70q8c")
+
+[node name="NextArea" type="Area3D" parent="NextText" node_paths=PackedStringArray("textMesh")]
+transform = Transform3D(-0.7740502, 0, -0.63312423, 0, 1, 0, 0.63312423, 0, -0.7740502, 0, 0, 0)
+script = ExtResource("4_iy702")
+textMesh = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NextText/NextArea"]
+transform = Transform3D(0.66230625, 0, 0.7492332, 0, 1, 0, -0.7492332, 0, 0.66230625, 0, 0, -5.9604645e-08)
+shape = SubResource("BoxShape3D_efkcr")
+
+[node name="SlotMachine" parent="." instance=ExtResource("3_iy702")]
+transform = Transform3D(0.01968804, 0, -0.0035186743, 0, 0.02, 0, 0.0035186743, 0, 0.01968804, 0.94822943, 0.44768417, -1.0965791)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SlotMachine"]
+transform = Transform3D(6.958655, 0, 49.513393, 0, 49.999996, 0, -49.513397, 0, 6.9586544, 0, 19.826519, 0)
+mesh = SubResource("TextMesh_iy702")
+skeleton = NodePath("../../Camera3D")
 
 [node name="Terrain" type="Node3D" parent="."]
 
@@ -168,9 +210,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1434162, 0, -0.31295252)
 
 [node name="hill_single_B3" parent="Terrain/Node3D5" instance=ExtResource("5_rom4e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.86380315, 0, -0.31295252)
-
-[node name="SlotMachine" parent="." instance=ExtResource("6_i0x2x")]
-transform = Transform3D(0.09989858, 0, -0.0045031793, 0, 0.10000003, 0, 0.0045031793, 0, 0.09989858, 1.0871435, 0.40836352, -0.9326854)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.34202015, -0.13077995, 0.93054765, 0, 0.9902681, 0.13917312, -0.9396927, 0.04760001, -0.33869165, 2.091, 0.8, -0.783)

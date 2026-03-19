@@ -1,32 +1,34 @@
 [gd_scene load_steps=10 format=3 uid="uid://buuwb30d2gcke"]
 
 [ext_resource type="Script" uid="uid://dn5emwxmg3i47" path="res://Objects/Player.cs" id="1_3y5cq"]
-[ext_resource type="PackedScene" uid="uid://bgb75ahg5vv70" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/props/barrel.gltf" id="1_y0qk3"]
 [ext_resource type="PackedScene" uid="uid://bkhwv2vn4l8ry" path="res://Objects/tree.tscn" id="2_0ad8t"]
 [ext_resource type="Script" uid="uid://blq70ykwd3l5t" path="res://Objects/Camera.cs" id="3_2i4gt"]
+[ext_resource type="PackedScene" uid="uid://b0oxg2jumunta" path="res://CharacterModel.tscn" id="3_slvmq"]
 [ext_resource type="AudioStream" uid="uid://cfbk7uhk30bu4" path="res://assets/walk2.mp3" id="5_0ar0x"]
 [ext_resource type="Script" uid="uid://bwqbbyr2h8j6q" path="res://PlayerUi.cs" id="5_x20fu"]
 [ext_resource type="Script" uid="uid://52glmdijdjky" path="res://SfxPlayer.cs" id="6_slvmq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3y5cq"]
-size = Vector3(0.2, 0.2, 0.2)
+size = Vector3(0.2, 0.25, 0.1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ad8t"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "walkingPlayer")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "characterModel", "walkingPlayer")]
 script = ExtResource("1_3y5cq")
 camera = NodePath("Camera3D")
+characterModel = NodePath("CharacterModel")
 treeScene = ExtResource("2_0ad8t")
 walkingPlayer = NodePath("AudioStreamPlayer3D")
 
-[node name="barrel2" parent="." instance=ExtResource("1_y0qk3")]
+[node name="CharacterModel" parent="." instance=ExtResource("3_slvmq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 shape = SubResource("BoxShape3D_3y5cq")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1896379, 1.9023603)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.5)
 script = ExtResource("3_2i4gt")
 player = NodePath("..")
 
@@ -64,10 +66,12 @@ size_flags_horizontal = 8
 
 [node name="Label" type="Label" parent="PlayerUi/PanelContainer/VBoxContainer/BoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Coins"
 
 [node name="Label2" type="Label" parent="PlayerUi/PanelContainer/VBoxContainer/BoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 
 [node name="BoxContainer2" type="BoxContainer" parent="PlayerUi/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -75,7 +79,9 @@ size_flags_horizontal = 8
 
 [node name="Label" type="Label" parent="PlayerUi/PanelContainer/VBoxContainer/BoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Seeds"
 
 [node name="Label2" type="Label" parent="PlayerUi/PanelContainer/VBoxContainer/BoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32

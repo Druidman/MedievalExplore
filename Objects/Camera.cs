@@ -3,8 +3,8 @@ using System;
 
 public partial class Camera : Camera3D
 {
-	private const int movementRadius = 15;
-	private Vector3 cameraOffset = new Vector3(0, 3, 4.5f);
+	
+	private Vector3 cameraOffset = new Vector3(0, 1.5f, 2.25f);
 	private float angle = 0.0f;
 
 	[Export]

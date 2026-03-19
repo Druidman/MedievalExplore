@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0oxg2jumunta"]
+
+[ext_resource type="PackedScene" uid="uid://w6ou7j5wb54s" path="res://ExploreAssets/Characters/Barbarian.glb" id="1_37gaf"]
+[ext_resource type="Script" uid="uid://dmxg2no0cvu0i" path="res://CharacterModel.cs" id="1_wuxav"]
+[ext_resource type="PackedScene" uid="uid://b3mlr15aeymhp" path="res://ExploreAssets/Characters/Knight.glb" id="2_wuxav"]
+[ext_resource type="PackedScene" uid="uid://bl6o55fosupl3" path="res://ExploreAssets/Characters/Mage.glb" id="3_hfymf"]
+
+[node name="CharacterModel" type="Node3D" node_paths=PackedStringArray("mage", "knight", "barbarian")]
+script = ExtResource("1_wuxav")
+mage = NodePath("Mage")
+knight = NodePath("Knight")
+barbarian = NodePath("Barbarian")
+
+[node name="Barbarian" parent="." instance=ExtResource("1_37gaf")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Knight" parent="." instance=ExtResource("2_wuxav")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+visible = false
+
+[node name="Mage" parent="." instance=ExtResource("3_hfymf")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+visible = false

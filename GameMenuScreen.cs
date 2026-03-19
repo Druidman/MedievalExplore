@@ -10,6 +10,9 @@ public partial class GameMenuScreen : Node3D
 
 	[Export]
 	PackedScene gameScene;
+
+	[Export]
+	CharacterViewer characterViewer;
   // Called when the node enters the scene tree for the first time.
 
 	World3DButton lastHoveredButton = null;
@@ -25,6 +28,7 @@ public partial class GameMenuScreen : Node3D
 			audioPlayer.Stop(); 
 			audioPlayer.Play();
 			GetTree().ChangeSceneToPacked(gameScene);
+			GameGlobals.characterPicked = characterViewer.characterType;
 		}
 	if (inputEvent.IsActionPressed("mouseClick"))
 		{
@@ -41,6 +45,11 @@ public partial class GameMenuScreen : Node3D
 				audioPlayer.Stop();
 				audioPlayer.Play();
 				GetTree().Quit();
+			}
+			if (area is NextButton nButton)
+			{
+				characterViewer.NextCharacter();
+
 			}
 		}
   }

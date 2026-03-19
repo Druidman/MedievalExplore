@@ -14,6 +14,9 @@ public partial class Player : CharacterBody3D
 	public Camera3D camera;
 
 	[Export]
+	CharacterModel characterModel;
+
+	[Export]
 	PackedScene treeScene;
 	private float upward_force = 0f;
 
@@ -42,7 +45,7 @@ public partial class Player : CharacterBody3D
 
 	public override void _Ready()
 	{
-		GD.Print("player ready");
+		characterModel.ChangeCharacter(GameGlobals.characterPicked);
 	}
 
 	public void BlockEvents()
