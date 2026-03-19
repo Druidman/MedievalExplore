@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://buuwb30d2gcke" path="res://Objects/player.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://cuej7ogb3gs54" path="res://Objects/TreeSeed.tscn" id="3_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://dpkqtk51lag58" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_A.gltf" id="4_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://myh1j1w8pdts" path="res://game_menu_screen.tscn" id="4_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://c5ct8q4tc65wf" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_B_trees.gltf" id="5_eow3j"]
 [ext_resource type="PackedScene" uid="uid://dii3ydxm2ju6p" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C.gltf" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://c3omws2hfcrrv" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C_trees.gltf" id="7_vef74"]
@@ -28,7 +27,6 @@ tonemap_mode = 2
 script = ExtResource("1_feb5d")
 tileScene = ExtResource("2_e2o6t")
 treeSeedScene = ExtResource("3_mfdv2")
-mainMenuScene = ExtResource("4_mfdv2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
