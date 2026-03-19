@@ -1,13 +1,15 @@
-[gd_scene load_steps=30 format=3 uid="uid://myh1j1w8pdts"]
+[gd_scene load_steps=33 format=3 uid="uid://myh1j1w8pdts"]
 
 [ext_resource type="PackedScene" uid="uid://dpkqtk51lag58" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_A.gltf" id="1_h2bto"]
 [ext_resource type="Script" uid="uid://cb8jmj07maxoe" path="res://GameMenuScreen.cs" id="1_xnq5w"]
 [ext_resource type="PackedScene" uid="uid://c2tsu7d7l4pgf" path="res://game.tscn" id="2_i0x2x"]
 [ext_resource type="PackedScene" uid="uid://c5ct8q4tc65wf" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_B_trees.gltf" id="2_ybmwl"]
+[ext_resource type="AudioStream" uid="uid://densrbmyye3b5" path="res://art/medieval-explore-game-song.ogg" id="3_70q8c"]
 [ext_resource type="PackedScene" uid="uid://dop04vseyjy6r" path="res://SlotMachine.gltf" id="3_iy702"]
 [ext_resource type="PackedScene" uid="uid://b0oxg2jumunta" path="res://CharacterModel.tscn" id="3_x30af"]
 [ext_resource type="PackedScene" uid="uid://dii3ydxm2ju6p" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C.gltf" id="3_xnq5w"]
 [ext_resource type="Script" uid="uid://cuuy4221aqtdc" path="res://CharacterViewer.cs" id="4_70q8c"]
+[ext_resource type="Script" uid="uid://dvbr3vugupffq" path="res://MusicPlayer.cs" id="4_efkcr"]
 [ext_resource type="Script" uid="uid://1p852vtnqy6" path="res://NextButton.cs" id="4_iy702"]
 [ext_resource type="PackedScene" uid="uid://c3omws2hfcrrv" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hills_C_trees.gltf" id="4_yylvn"]
 [ext_resource type="PackedScene" uid="uid://bm6uqrxujag6r" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/hill_single_B.gltf" id="5_rom4e"]
@@ -26,7 +28,10 @@ text = ">"
 [sub_resource type="BoxShape3D" id="BoxShape3D_efkcr"]
 size = Vector3(0.1, 0.1, 0.1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70q8c"]
+
 [sub_resource type="TextMesh" id="TextMesh_iy702"]
+material = SubResource("StandardMaterial3D_70q8c")
 text = "Press \"space\""
 font_size = 11
 
@@ -41,10 +46,10 @@ font_size = 5
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2bto"]
 size = Vector3(0.1, 0.1, 0.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yylvn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efkcr"]
 
 [sub_resource type="TextMesh" id="TextMesh_nycqf"]
-material = SubResource("StandardMaterial3D_yylvn")
+material = SubResource("StandardMaterial3D_efkcr")
 text = "Settings"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ybmwl"]
@@ -68,6 +73,12 @@ settings = NodePath("Settings")
 gameScene = ExtResource("2_i0x2x")
 characterViewer = NodePath("CharacterViewer")
 audioPlayer = NodePath("AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(0.02443221, 0, 0.9997015, 0, 1, 0, -0.9997015, 0, 0.02443221, 1.0616727, 0.4491819, -0.4908679)
+stream = ExtResource("3_70q8c")
+autoplay = true
+script = ExtResource("4_efkcr")
 
 [node name="CharacterViewer" parent="." instance=ExtResource("3_x30af")]
 transform = Transform3D(0.02443221, 0, 0.9997015, 0, 1, 0, -0.9997015, 0, 0.02443221, 1.0616727, 0.4491819, -0.4908679)

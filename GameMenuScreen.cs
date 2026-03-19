@@ -48,6 +48,8 @@ public partial class GameMenuScreen : Node3D
 			}
 			if (area is NextButton nButton)
 			{
+				audioPlayer.Stop();
+				audioPlayer.Play();
 				characterViewer.NextCharacter();
 
 			}

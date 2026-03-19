@@ -9,6 +9,9 @@ public partial class SlotMachine : StaticBody3D
 	MeshInstance3D instructionText;
 
 	[Export]
+	SfxPlayer rollingPlayer;
+
+	[Export]
 	Control ui;
 
 	[Export]
@@ -114,6 +117,9 @@ public partial class SlotMachine : StaticBody3D
 
 		this.rollTimer.Stop(); // just in case
 
+		this.rollingPlayer.Stop();
+		this.rollingPlayer.Play();
+
 		this.rollTimer.Start();
 		this.rolling = true;
 		this.player.TakeCoins(5);
@@ -123,6 +129,7 @@ public partial class SlotMachine : StaticBody3D
 	{
 		this.rolling = false;
 		this.rollTimer.Stop(); // in case
+		this.rollingPlayer.Stop();
 		
 		//checking result
 
