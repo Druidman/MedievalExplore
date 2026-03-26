@@ -4,8 +4,8 @@ using System;
 public partial class Camera : Camera3D
 {
 	
-	private Vector3 cameraOffset = new Vector3(0, 1.5f, 2.25f);
-	private float angle = 0.0f;
+	private Vector3 cameraOffset = new Vector3(0, 2.5f, 2.25f);
+	private float angle = 0.0f; 
 
 	[Export]
 	Player player;
@@ -28,18 +28,19 @@ public partial class Camera : Camera3D
 		UpdateCamera();
 	}
 
-	public override void _Input(InputEvent @event)
-	{
-		if (this.player.eventsBlocked) return;
-		
-		if (@event is InputEventMouseMotion motion)
-		{
-			angle -= motion.Relative.X * 0.01f;
-		}
-	}
-
 	public override void _Process(double delta)
 	{
+		if (Input.IsActionPressed("RotateCameraLeft"))
+		{
+			angle += Mathf.DegToRad(180) * (float)delta;
+			
+		}
+		if (Input.IsActionPressed("RotateCameraRight"))
+		{
+			angle -= Mathf.DegToRad(180) * (float)delta;
+
+		}
 		UpdateCamera();
+		
 	}
 }
