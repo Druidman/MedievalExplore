@@ -38,7 +38,6 @@ public partial class SlotMachine : StaticBody3D
 
 		this.player.UnblockEvents();
 				
-		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 	public override void _Input(InputEvent inputEvent)
 	{
@@ -50,13 +49,13 @@ public partial class SlotMachine : StaticBody3D
 				
 				this.player.UnblockEvents();
 				
-				Input.MouseMode = Input.MouseModeEnum.Captured;
+
 				
 			}
 			else
 			{
 				this.player.BlockEvents();	
-				Input.MouseMode = Input.MouseModeEnum.Visible;
+
 			}
 			this.ui.Visible = !this.ui.Visible;
 
@@ -82,7 +81,6 @@ public partial class SlotMachine : StaticBody3D
 
 		this.ui.Visible = false;
 		this.player.UnblockEvents();
-		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	public override void _Process(double delta)

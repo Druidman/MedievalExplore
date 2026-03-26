@@ -132,6 +132,9 @@ public partial class Player : CharacterBody3D
 	}
 	private void handleCharacterRotation(bool moved_right, bool moved_left, bool moved_front, bool moved_back)
 	{
+		// no rotate without movement
+		if (!(moved_back || moved_front || moved_left || moved_right)) return;
+		
 		bool isDiagonal = (moved_right || moved_left) && ( moved_front || moved_back);
 
 		float factorSides = Mathf.DegToRad(90); // default for not diagonal
@@ -168,10 +171,7 @@ public partial class Player : CharacterBody3D
 
 		if (!this.eventsBlocked)
 		{
-			// if (!Input.IsActionPressed("freeCamera"))
-			// {
-			// 	Rotation = new Vector3(Rotation.X, camera.GlobalRotation.Y, Rotation.Z);
-			// }
+
 			if (Input.IsActionJustPressed("placeTree") && seeds >= 1 && IsOnFloor())
 			{
 				Tree tree = treeScene.Instantiate<Tree>();
