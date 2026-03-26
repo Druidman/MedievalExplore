@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkhwv2vn4l8ry"]
+[gd_scene load_steps=9 format=3 uid="uid://bkhwv2vn4l8ry"]
 
 [ext_resource type="PackedScene" uid="uid://lupur78psli8" path="res://ExploreAssets/KayKit_Medieval_Hexagon_Pack_1.0_FREE/Assets/gltf/decoration/nature/tree_single_A.gltf" id="1_i4ofe"]
 [ext_resource type="Script" uid="uid://2h4xvk6g8jll" path="res://Objects/Tree.cs" id="1_qca5r"]
@@ -14,17 +14,19 @@ text = "Click \"r\" to destroy"
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qca5r"]
 height = 1.0
 
-[node name="Tree" type="Node3D" node_paths=PackedStringArray("guideText", "destroyer", "treeModel", "destroyerTimer", "growTimer", "StreamPlayer")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h6a8n"]
+height = 0.68
+radius = 0.15
+
+[node name="Tree" type="Node3D" node_paths=PackedStringArray("guideText", "treeModel", "growTimer", "treeDestroyPlayer")]
 script = ExtResource("1_qca5r")
 guideText = NodePath("MeshInstance3D2")
-destroyer = NodePath("MeshInstance3D")
 treeModel = NodePath("Node3D")
-destroyerTimer = NodePath("Timer2")
 growTimer = NodePath("Timer")
-StreamPlayer = NodePath("AudioStreamPlayer3D")
+treeDestroyPlayer = NodePath("AudioStreamPlayer3D")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 3.0
 autostart = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -51,6 +53,14 @@ transform = Transform3D(0.56, 0, 0, 0, 0.56, 0, 0, 0, 0.56, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 0)
 shape = SubResource("CylinderShape3D_qca5r")
 
+[node name="Area3D2" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28143957, 0)
+shape = SubResource("CylinderShape3D_h6a8n")
+
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_auw0v")
 script = ExtResource("4_h6a8n")
@@ -59,3 +69,4 @@ script = ExtResource("4_h6a8n")
 [connection signal="timeout" from="Timer2" to="." method="OnDestroyEnd"]
 [connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
 [connection signal="body_exited" from="Area3D" to="." method="OnBodyExited"]
+[connection signal="area_entered" from="Area3D2" to="." method="OnAxeEntered"]

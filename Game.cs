@@ -45,6 +45,7 @@ public partial class Game : Node3D
 	{
 		if (inputEvent.IsActionPressed("return"))
 		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
 			// GetTree().ChangeSceneToPacked(mainMenuScene);
 			GetTree().ChangeSceneToFile("res://game_menu_screen.tscn");
 		}

@@ -9,6 +9,13 @@ public partial class Player : CharacterBody3D
 	private const float JUMP_FORCE = 1f;
 	private const float GRAVITY_SPEED = 3f;
 
+	float rotationDeltaDeg = 0;
+
+	public bool isDestroyingTree = false;
+
+	[Export]
+	Node3D axe;
+
 	Godot.Vector3 velocity;
 	[Export]
 	public Camera3D camera;
@@ -134,7 +141,7 @@ public partial class Player : CharacterBody3D
 	{
 		// no rotate without movement
 		if (!(moved_back || moved_front || moved_left || moved_right)) return;
-		
+
 		bool isDiagonal = (moved_right || moved_left) && ( moved_front || moved_back);
 
 		float factorSides = Mathf.DegToRad(90); // default for not diagonal
@@ -212,5 +219,34 @@ public partial class Player : CharacterBody3D
 			if (!this.walkingPlayer.Playing) return;
 			this.walkingPlayer.Stop();
 		}
+	}
+
+  public override void _Input(InputEvent @event)
+  {
+		if (@event is InputEventMouseMotion mEvent && isDestroyingTree )
+		{
+			float rot = GlobalRotation.Y - mEvent.Relative.X * 0.001f;
+
+			
+			GlobalRotation = new Godot.Vector3(
+				GlobalRotation.X,
+				rot,
+				GlobalRotation.Z
+			);
+		}
+  }
+	public void StartTreeDestroy(Tree tree)
+	{
+		this.isDestroyingTree = true;
+		this.axe.Visible = true;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+		this.BlockEvents();
+	}
+	public void StopTreeDestroy()
+	{
+		this.isDestroyingTree = false;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+		this.axe.Visible = false;
+		this.UnblockEvents();
 	}
 }

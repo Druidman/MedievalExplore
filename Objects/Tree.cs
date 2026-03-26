@@ -8,20 +8,19 @@ public partial class Tree : Node3D
 	[Export]
 	MeshInstance3D guideText;
 
-	[Export]
-	MeshInstance3D destroyer;
+
+	float hp = 5;
+
 
   [Export]
 	Node3D treeModel;
 
-	[Export]
-	Timer destroyerTimer;
 
   [Export]
   Timer growTimer;
 
 	[Export]
-	AudioStreamPlayer3D StreamPlayer;
+	SfxPlayer treeDestroyPlayer;
 	bool isFullyGrown = false;
 	Player player = null;
 
@@ -61,46 +60,39 @@ public partial class Tree : Node3D
 	{
 		if (inputEvent.IsActionPressed("DestroyTree") && player != null && isFullyGrown)
 		{
-			this.StartDestroyer();
+			if (this.player.isDestroyingTree)
+			{
+				this.player.StopTreeDestroy();
+			}
+			else
+			{
+				this.player.StartTreeDestroy(this);	
+			}
+			
 		}
-	}
-
-	public void StartDestroyer()
-	{
-		this.destroyer.Visible = true;
-		
-		this.destroyerTimer.Start();
-		this.StreamPlayer.Play();
 	}
 	public override void _Process(double delta)
 	{
 	
-		if (this.destroyer.Visible)
+		
+
+		if (!isFullyGrown)
 		{
-			this.destroyer.Position = this.destroyer.Position.Rotated(Godot.Vector3.Up, Mathf.DegToRad(360*(float)delta));
+			float scale = (float)(30 - this.growTimer.TimeLeft) / 30; // 30 for 30s
+			if (scale < 0.2) scale = 0.2f;
+			treeModel.Scale = new Vector3(scale, scale, scale);
+
 		}
 
-	if (!isFullyGrown)
-	{
-	  float scale = (float)(30 - this.growTimer.TimeLeft) / 30; // 30 for 30s
-	if (scale < 0.2) scale = 0.2f;
-	  treeModel.Scale = new Vector3(scale, scale, scale);
 
 	}
 
-
-	}
-
-	public void OnDestroyEnd()
+	public void OnDestroy()
 	{
-		
-		this.StreamPlayer.Stop();
-		this.destroyer.Visible = false;
-		
-		this.destroyerTimer.Stop();
 
 		if (this.player == null) return;
 		this.player.AddCoins(20);
+		this.player.StopTreeDestroy();
 		
 		GetParent().RemoveChild(this);
 
@@ -111,6 +103,20 @@ public partial class Tree : Node3D
 
   public void OnGrown()
   {
-	this.isFullyGrown = true;
+		this.isFullyGrown = true;
   }
+
+	public void OnAxeEntered(Area3D area)
+	{
+		if (this.player == null) return;
+		if (!this.player.isDestroyingTree) return;
+		treeDestroyPlayer.Play();
+
+		hp-=1;
+		if (hp <= 0)
+		{
+			OnDestroy();
+		}
+
+	}
 }
